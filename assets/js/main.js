@@ -4,193 +4,68 @@ $(".btn-select").click(function(){
   progress+=20;
 });
 
-var all_question=[{
-    question:'Which is the oldest airline in the world?',
-    choise:{
-        correct:"KLM",
-        wrong:["Avianca","Qantas"]
+var questionNumber =0;
+var totalScore=0;
+var question;
+var totalAnswers;
+var correcAnswers;
+var quizLength;
+var quizItems=[
+    {
+        "qImg": "../image/plane.svg",
+        "question":"Which is the oldest airline in the world?",
+        "answer":["Avianca","KLM","Qantas"],
+        "correct":"1"
+    },{
+       "qImg": "../image/bote.svg",
+        "question":"Which is the largest port in the world?",
+        "answer":["Port of Shanghai","Port of Singapore","Port of Rotterdam"],
+        "correct":"0" 
+    },{
+       "qImg": "../image/bici.svg",
+        "question":"What is the longest distance cycling backwards?",
+        "answer":["89.30 km","675 km","337.60 km"],
+        "correct":"3" 
+    },{
+        "qImg": "../image/bus.svg",
+        "question":"What is the highest speed ever reached by a school bus?",
+        "answer":["590 km/h","320 km/h","245 km/h"],
+        "correct":"0"
+    },{
+       "qImg": "../image/car.svg",
+        "question":"What is the longest car trip on one tank of gas?",
+        "answer":["2617 km","3568 km","1732 km"],
+        "correct":"0" 
     }
-},{
-   question:'Which is the largest port in the world?',
-    choise:{
-        correct:"Port of Shanghai",
-        wrong:["Port of Singapore","Port of Rotterdam"] 
-   }
-},{
-   question:'What is the longest distance cycling backwards?',
-    choise:{
-        correct:"337.60 km",
-        wrong:["89.30 km","675 km"] 
-   } 
-},{
-    question:'What is the highest speed ever reached by a school bus?',
-    choise:{
-        correct:"590 km/h",
-        wrong:["320 km/h","245 km/h"] 
-   }
-},{
-    question:'What is the longest car trip on one tank of gas?',
-    choise:{
-        correct:"2617 km",
-        wrong:["3568 km","1732 km"] 
-   }
-}];
+];
 
-var Quiz = function(quiz_name){
-    this.quiz_name=quiz_name;
-    this.questions=[];
-}
-
-Quiz.prototype.add_question = function(question){
-    var indexAddQuestions = Math.floor(Math.random()*this.questions.length);
-     this.questions.splice(indexAddQuestions, 0, question);
-}
-
-Quiz.prototype.render = function(container) {
-  var self = this;
-  $('#quiz-results').hide();
-  $('#quiz-name').text(this.quiz_name);
-  var question_container = $('<div>').attr('id', 'question').insertAfter('#quiz-name');
-  
-  function change_question() {
-   self.questions[current_question_index].render(question_container);
-    $('#prev-question-button').prop('disabled', current_question_index === 0);
-    $('#next-question-button').prop('disabled', current_question_index === self.questions.length - 1);
-    
-    var all_questions_answered = true;
-    for (var i = 0; i < self.questions.length; i++) {
-      if (self.questions[i].user_choice_index === null) {
-        all_questions_answered = false;
-        break;
-      }
-    }
-    $('#submit-button').prop('disabled', !all_questions_answered);
-  }
-  
-  var current_question_index = 0;
-  change_question();
-  $('#prev-question-button').click(function() {
-    if (current_question_index > 0) {
-      current_question_index--;
-      change_question();
-    }
-  });
-  
-  $('#next-question-button').click(function() {
-    if (current_question_index < self.questions.length - 1) {
-      current_question_index++;
-      change_question();
-    }
-  });
-    
-  $('#submit-button').click(function() {
-    var score = 0;
-    for (var i = 0; i < self.questions.length; i++) {
-      if (self.questions[i].user_choice_index === self.questions[i].correct_choice_index) {
-        score++;
-      }
-    }
-    
-    var percentage = score / self.questions.length;
-    console.log(percentage);
-    var message;
-    if (percentage === 1) {
-      message = 'Great job!'
-    } else if (percentage >= .75) {
-      message = 'You did alright.'
-    } else if (percentage >= .5) {
-      message = 'Better luck next time.'
-    } else {
-      message = 'Maybe you should try a little harder.'
-    }
-    $('#quiz-results-message').text(message);
-    $('#quiz-results-score').html('You got <b>' + score + '/' + self.questions.length + '</b> questions correct.');
-    $('#quiz-results').slideDown();
-    $('#quiz button').slideUp();
-  });
-  
-  question_container.bind('user-select-change', function() {
-    var all_questions_answered = true;
-    for (var i = 0; i < self.questions.length; i++) {
-      if (self.questions[i].user_choice_index === null) {
-        all_questions_answered = false;
-        break;
-      }
-    }
-    $('#submit-button').prop('disabled', !all_questions_answered);
-  });
-}
-
-var Question = function(question_string, correct_choice, wrong_choices) {
-  this.question_string = question_string;
-  this.choices = [];
-  this.user_choice_index = null; 
-  
-  this.correct_choice_index = Math.floor(Math.random() * wrong_choices.length + 1);
-  
-  var number_of_choices = wrong_choices.length + 1;
-  for (var i = 0; i < number_of_choices; i++) {
-    if (i === this.correct_choice_index) {
-      this.choices[i] = correct_choice;
-    } else {
-      var wrong_choice_index = Math.floor(Math.random(0, wrong_choices.length));
-      this.choices[i] = wrong_choices[wrong_choice_index];
-      wrong_choices.splice(wrong_choice_index, 1);
-    }
-  }
-}
-
-Question.prototype.render = function(container) {
-  var self = this;
-  
-  var question_string_h2;
-  if (container.children('h2').length === 0) {
-    question_string_h2 = $('<h2>').appendTo(container);
-  } else {
-    question_string_h2 = container.children('h2').first();
-  }
-  question_string_h2.text(this.question_string);
-  
-  if (container.children('input[type=radio]').length > 0) {
-    container.children('input[type=radio]').each(function() {
-      var radio_button_id = $(this).attr('id');
-      $(this).remove();
-      container.children('label[for=' + radio_button_id + ']').remove();
-    });
-  }
-  for (var i = 0; i < this.choices.length; i++) {
-    var choice_radio_button = $('<input>')
-      .attr('id', 'choices-' + i)
-      .attr('type', 'radio')
-      .attr('name', 'choices')
-      .attr('value', 'choices-' + i)
-      .attr('checked', i === this.user_choice_index)
-      .appendTo(container);
-    
-    var choice_label = $('<label>')
-      .text(this.choices[i])
-      .attr('for', 'choices-' + i)
-      .appendTo(container);
-  }
-  
-  $('input[name=choices]').change(function(index) {
-    var selected_radio_button_value = $('input[name=choices]:checked').val();
-    
-    self.user_choice_index = parseInt(selected_radio_button_value.substr(selected_radio_button_value.length - 1, 1));
-    
-    container.trigger('user-select-change');
-  });
-}
-
-$(document).ready(function() {
-  var quiz = new Quiz('My Quiz');
-  
-  for (var i = 0; i < all_questions.length; i++) {
-    var question = new Question(all_questions[i].question_string, all_questions[i].choices.correct, all_questions[i].choices.wrong);
-    
-    quiz.add_question(question);
-  }
-  
-  var quiz_container = $('#quiz');
-  quiz.render(quiz_container);
+$(document).ready(function(){
+    nextQuestion();
 });
+
+function nextQuestion(){
+    quizLength = quizItems.length;
+    
+    if(questionNumber==quizLength){
+        $('.deepQuestion').fadeOut(function(){
+        setTimeout(function(){
+            $('#score').html("Your total Score:" + totalScore).fadeIn();
+        },500);
+        });
+    }else{
+        $('#question, #answers').html(''),
+        $('#qImg').attr('src','');
+        question = quizItems[questionNumber]['question'];
+        qImg = quizItems[questionNumber]['qImg'];
+        totalAnswers = quizItems[questionNumber].answers.length;
+         correctAnswer = quizItems[questionNumber]['correct'];
+        if (qImg !== "") {
+        $('#qImg').attr('src',qImg).show();
+          } else {
+            $('#qImg').hide();
+      }
+        
+    }
+}
+
+
