@@ -51,7 +51,7 @@ img{
   position: absolute;
   content: '\2714';
   color: #1f955a;
-  transform: translateX(125px);
+  transform: translateX(120px);
   top: -20px;
   opacity: 0;
 }
@@ -99,6 +99,12 @@ img{
 .icon-google-plus{
   background: rgba(203, 15, 15, 0.42); 
   color: #fff;
+}
+.prevNext span{
+	font-size: 35px;
+	color: #ff10a3;
+	margin: 10px;
+	cursor: pointer;
 }
 .footer{
   color: #bebebe;

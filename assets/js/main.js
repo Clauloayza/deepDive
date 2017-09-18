@@ -1,50 +1,52 @@
+const all_question = [{
+	qImg:'assets/image/plane.svg',
+	question:'Which is the oldest airline in the world?',
+ 	choise:{
+ 	correct:"KLM",
+ 	wrong:["Avianca","Qantas"]
+  }
+
+},{
+	qImg:'assets/image/bote.svg',
+	question:'Which is the largest port in the world?',
+ 	choise:{
+ 	correct:"Port of Shanghai",
+ 	wrong:["Port of Singapore","Port of Rotterdam"]
+	}
+},{
+	qImg:'assets/image/bici.svg',
+	question:'What is the longest distance cycling backwards?',
+ 	choise:{
+ 	correct:"337.60 km",
+ 	wrong:["89.30 km","675 km","337.60 km"]
+	}
+},{
+	qImg:'assets/image/bus.svg',
+	question:'What is the highest speed ever reached by a school bus?',
+ 	choise:{
+ 	correct:"590 km/h",
+ 	wrong:["320 km/h","245 km/h"]
+	}
+},{
+	qImg:'assets/image/track.svg',
+	question:'What is the longest car trip on one tank of gas?',
+ 	choise:{
+ 	correct:"2617 km",
+ 	wrong:["3568 km","1732 km"]
+	}
+}];
+
 var progress=20;
 $(".btn-select").click(function(){
   $("#percent").css("width",progress+"%");
   progress+=20;
 });
 
-var questionNumber =0;
-var totalScore=0;
-var question;
-var totalAnswers;
-var correcAnswers;
 var quizLength;
-var quizItems=[
-    {
-        "qImg": "../image/plane.svg",
-        "question":"Which is the oldest airline in the world?",
-        "answer":["Avianca","KLM","Qantas"],
-        "correct":"1"
-    },{
-       "qImg": "../image/bote.svg",
-        "question":"Which is the largest port in the world?",
-        "answer":["Port of Shanghai","Port of Singapore","Port of Rotterdam"],
-        "correct":"0" 
-    },{
-       "qImg": "../image/bici.svg",
-        "question":"What is the longest distance cycling backwards?",
-        "answer":["89.30 km","675 km","337.60 km"],
-        "correct":"3" 
-    },{
-        "qImg": "../image/bus.svg",
-        "question":"What is the highest speed ever reached by a school bus?",
-        "answer":["590 km/h","320 km/h","245 km/h"],
-        "correct":"0"
-    },{
-       "qImg": "../image/car.svg",
-        "question":"What is the longest car trip on one tank of gas?",
-        "answer":["2617 km","3568 km","1732 km"],
-        "correct":"0" 
-    }
-];
-
-$(document).ready(function(){
-    nextQuestion();
-});
+var quizItems;
 
 function nextQuestion(){
-    quizLength = quizItems.length;
+    var quizLength = quizItems.length;
     
     if(questionNumber==quizLength){
         $('.deepQuestion').fadeOut(function(){
@@ -68,4 +70,7 @@ function nextQuestion(){
     }
 }
 
+$(document).ready(function(){
+    nextQuestion();
+});
 

@@ -19,7 +19,7 @@
       <span class="glyphicon glyphicon-info-sign infglyphicon pull-left"></span>
        <div class="row text-center">
           <div class="col-md-12 image text-center">
-            <img id="qImg" src="assets/image/plane.svg" alt="">
+            <img id="qImg" src="" alt="">
           </div>
        </div>
         
@@ -37,7 +37,7 @@
         <h1 class="quest" id="question"></h1>
         <div class="row select" id="answers">
           <div class="col-lg-4 col-md-4 col-sm-4">
-            <button class='btn btn-block btn-select' onclick="progressJs().increase(5);">
+            <button class='btn btn-block btn-select'>
                 <span class="abcOption">A</span><span class="check"></span>
             </button>
           </div>
@@ -60,11 +60,11 @@
            </div>            
         </div>
         </div>
-        <div>
-            <button id="submit-button">Submit Answers</button>
-            <button id="next-question-button">Next Question</button>
-            <button id="prev-question-button">Previous</button>
+        <div class="prevNext">
+            <span class="glyphicon glyphicon-arrow-left" id="prev-question-button"></span>
+            <span class="glyphicon glyphicon-arrow-right" id="next-question-button"></span>
         </div>
+        <button id="submit-button" class="btn btn-inf ">Submit</button>
         <div id="quiz-results">
             <p id="quiz-results-message"></p>
             <p id="quiz-results-score"></p>
