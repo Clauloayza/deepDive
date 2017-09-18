@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Deep-dive</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/icons/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/progress/progress.min.js"></script> 
+    <link rel="stylesheet" href="assets/progress/progressjs.min.css">  
+</head>
+<body>
+    <div class="container" style="margin: 10px auto">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xs-12 deepQuestion text-center container">
+      <span class="glyphicon glyphicon-info-sign infglyphicon pull-left"></span>
+       <div class="row text-center">
+          <div class="col-md-12 image text-center">
+            <img src="assets/image/plane.svg" alt="">
+          </div>
+       </div>
+        
+       <div class="row">
+        <div class="col-md-12 col-lg-12">
+          <div class="contprogress">0 of 5 answered</div>
+          <div class="progress">
+            <div id="percent" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+              <span class="sr-only">10% Complete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="boxContainer">
+        <h1 class="quest">Which is the oldest airline in the world?</h1>
+        <div class="row select">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <button class='btn btn-block btn-select' onclick="progressJs().increase(5);">
+                <span class="abcOption">A</span>Avianca<span class="check"></span>
+            </button>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <button class='btn btn-block btn-select'>
+                <span class="abcOption">B</span>KLM<span class="check"></span>
+            </button>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <button class='btn btn-block btn-select'>
+                <span class="abcOption">C</span>Qantas<span class="check"></span>
+            </button>
+          </div>
+        </div>
+        <div class="row icon">
+           <div class="col-offset-lg-4 ">
+               <span class="icon-twitter icons"></span>
+               <span class="icon-facebook icons"></span>
+               <span class="icon-google-plus icons"></span>
+           </div>            
+        </div>
+        </div>
+        <div>
+            <button id="submit-button">Submit Answers</button>
+            <button id="next-question-button">Next Question</button>
+            <button id="prev-question-button">Previous</button>
+        </div>
+        <div id="quiz-results">
+            <p id="quiz-results-message"></p>
+            <p id="quiz-results-score"></p>
+        </div>
+        <div class="footer">
+            <p class="text-center">&copy; 2017 Ihatetomatoes.net | Free icons by Sendag</p>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+<script type="text/javascript" src="assets/js/main.js"></script>
+<script src="https://use.fontawesome.com/1625bb79ec.js"></script>    
+</body>
+</html>
