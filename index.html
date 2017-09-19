@@ -13,68 +13,37 @@
     <link rel="stylesheet" href="assets/progress/progressjs.min.css">  
 </head>
 <body>
-    <div class="container" style="margin: 10px auto">
-    <div class="row">
-      <div class="col-md-12 col-lg-12 col-xs-12 deepQuestion text-center container">
-      <span class="glyphicon glyphicon-info-sign infglyphicon pull-left"></span>
-       <div class="row text-center">
-          <div class="col-md-12 image text-center">
-            <img id="qImg" src="" alt="">
-          </div>
-       </div>
-        
-       <div class="row">
-        <div class="col-md-12 col-lg-12">
-          <div class="contprogress">0 of 5 answered</div>
+   <section class="container deepQuestion">
+      <div style="margin: 10px auto" id="quiz-abc" class="text-center">
+          <span class="glyphicon glyphicon-info-sign infglyphicon pull-left"></span>
+          <span><img src="assets/image/right.svg" alt="" id="right"></span>
+          <span><img src="assets/image/left.svg" alt="" id="left"></span>
+          <img id="img-next" src="" alt="">
+          <div class="contprogress" id="progress">0 of 5 answered</div>
           <div class="progress">
             <div id="percent" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
               <span class="sr-only">10% Complete</span>
             </div>
           </div>
+        <div class="boxContainer text-center" id="box">
+            <h1 class="quest" id="question">Which is the oldest airline in the world?</h1>
+            <div class="row select text-center" id="choise"></div>
+            <div class="row icon">
+               <div class="col-offset-lg-4 ">
+                   <span class="icon-twitter icons" aria-hidden="true"></span>
+                   <span class="icon-facebook icons" aria-hidden="true"></span>
+                   <span class="icon-google-plus icons" aria-hidden="true"></span>
+               </div>            
+            </div>
         </div>
-      </div>
-        <div class="boxContainer">
-        <h1 class="quest" id="question"></h1>
-        <div class="row select" id="answers">
-          <div class="col-lg-4 col-md-4 col-sm-4">
-            <button class='btn btn-block btn-select'>
-                <span class="abcOption">A</span><span class="check"></span>
-            </button>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4">
-            <button class='btn btn-block btn-select'>
-                <span class="abcOption">B</span><span class="check"></span>
-            </button>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4">
-            <button class='btn btn-block btn-select'>
-                <span class="abcOption">C</span><span class="check"></span>
-            </button>
-          </div>
-        </div>
-        <div class="row icon">
-           <div class="col-offset-lg-4 ">
-               <span class="icon-twitter icons"></span>
-               <span class="icon-facebook icons"></span>
-               <span class="icon-google-plus icons"></span>
-           </div>            
-        </div>
-        </div>
-        <div class="prevNext">
-            <span class="glyphicon glyphicon-arrow-left" id="prev-question-button"></span>
-            <span class="glyphicon glyphicon-arrow-right" id="next-question-button"></span>
-        </div>
-        <button id="submit-button" class="btn btn-inf ">Submit</button>
-        <div id="quiz-results">
-            <p id="quiz-results-message"></p>
-            <p id="quiz-results-score"></p>
-        </div>
+        <div class="boxContainer text-center" id="result"></div>
+        <div class="boxContainer text-center" id="reset"></div> 
         <div class="footer">
             <p class="text-center">&copy; 2017 Ihatetomatoes.net | Free icons by Sendag</p>
         </div>
-      </div>
-    </div>
   </div>
+</section>
+    
    
 <script type="text/javascript" src="assets/js/main.js"></script>
 <script src="https://use.fontawesome.com/1625bb79ec.js"></script>    
