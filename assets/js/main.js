@@ -1,98 +1,170 @@
-const questionNumber = 0;
-const question;
-const totalAnswers;
-const correctAnswer;
-const quizLength;
+'use strict'
 
-const constructor= [
-  {
-      "image":'../image/plane.svg',
-      "question": 'Which is the oldest airline in the world?',
-      "answers": ['Avianca','KLM','Qantas'],
-      "correct": "1"
-  },
-  {
-      "image":'https://assets1.ignimgs.com/2015/03/12/redoutscreenshot00229jpg-57ab43_320w.jpg',
-      "question": 'Which is the oldest airline in the world?',
-      "answers": ['Port of Shanghai','Port of Singapore','Port of Rotterdam'],
-      "correct": "0"
-  },
-  {
-      "image":'../image/bici.svg',
-      "question": 'What is the longest distance cycling backwards?',
-      "answers": ['89.30 km','675.10 km','337.60 km'],
-      "correct": "2"
-  },
-  {
-      "image":'../image/bus.svg',
-      "question": 'What is the highest speed ever reached by a school bus?',
-      "answers": ['590 km/h','320 km/h','245 km/h'],
-      "correct": "0"
-  },
-  {
-      "image":'../image/car.svg',
-      "question": 'What is the longest car trip on one tank of gas?',
-      "answers": ['2617 km','3568 km','1732 km'],
-      "correct": "0"  
-  }
-];  
+const deepdive = {
 
-function nuevaPregunta(){
-  quizLength = constructor.length;
-  if(questionNumber === quizLength){ 
-    $('.quiz-abc').fadeOut(function(){
-      setTimeout(function(){
-        html("Your total score: " + totalScore).fadeIn();
-      },500);
-    });
-  } else {
-    $('#question, #choise').html('');
-    $('#img-next').attr('src','');
-    question = constructor[questionNumber]['question'];
-    image = constructor[questionNumber]['image'];
-    totalAnswers = constructor[questionNumber].answers.length;
-    correctAnswer = constructor[questionNumber]['correct'];
-    if (image !== "") {
-      $('#img-next').attr('src',image).show();
-    } else {
-      $('#img-next').hide();
-    }
-    $('#question').text(question);
-    for(i=0;i<totalAnswers;i++){
-      $('#answers').append('<div id="'+ i +'" class="answer-button">'+constructor[questionNumber].answers[i]+'</div>');
-    }
-    $('.quiz-abc').fadeTo(500,1);
-    $(".answer-button").on('click',answerQuestion);
-    pulseClick(0);
-  }
+	questions:{
+		0:{
+			answer: 'Which is the oldest airline in the world?',
+			choise: {A:'Avianca', B:'KLM', C:'Qantas'},
+			result: 'KLM',
+			image: 'assets/image/plane.svg'
+		},
+		1:{
+			answer: 'Which is the largest port in the world?',
+			choise: {A:'Port of Shanghai', B:'Port of Singapore', C:'Port of Rotterdam'},
+			result: 'Port of Shanghai',
+			image: 'assets/image/bote.svg'
+		},
+		2:{
+			answer: 'What is the longest distance cycling backwards?',
+			choise: {A:'89.30 km', B:'675.10 km', C:'337.60 km'},
+			result: '337.60 km',
+			image: 'assets/image/bici.svg'
+		},
+		3:{
+			answer: 'What is the highest speed ever reached by a school bus?',
+			choise: {A:'590 km/h', B:'320 km/h', C:'245 km/h'},
+			result: '590 km/h',
+			image: 'assets/image/bus.svg'
+		},
+		4:{
+			answer: 'What is the longest car trip on one tank of gas?',
+			choise: {A:'2617 km', B:'3568 km', C:'1732 km'},
+			result: '2617 km',
+			image: 'assets/image/car.svg'
+		}
+  },
+  
+	arrow: {
+		next: null,
+		previous: null
+  },
+  
+	answersCont: {
+		all:null,
+		answer: 0,
+		allPoints: 0
+  },
+  
+  group: [],
+  
+  check: true,
+  
+  progressBar: ()=>{
+		$('.progress-label').html(`${deepdive.group.length} of ${deepdive.answersCont.all} answered`);
+		let avance = 20*deepdive.group.length;
+		$(".progress-bar").width(`${avance}%`);
+  },
+  
+ 	crearanswer : ()=>{
+    deepdive.progressBar();
+
+    $("#quiz").empty();
+        let answerActual = deepdive.questions[deepdive.answersCont.answer];
+    
+		$("header").html(`<image src="${answerActual.image}">`);
+		$("#quiz").append(
+			`<h1 class="text-center"> ${answerActual.answer} </h1>
+			 <div class="choise row"></div>`
+		)
+		$.each(answerActual.choise, (key,value)=>{
+			let clase = '';
+			if (deepdive.group[deepdive.answersCont.answer] == value) {
+				clase = 'seleccionado';
+			} 
+			$('<div>').addClass(`col-md-4 ${clase}`).html(
+				`<button class="btn"><span class='alternativa'>${key}</span>${value}</button>`
+			).appendTo(".choise").click((e)=>{
+				deepdive.saveResult(e.currentTarget, value);
+			})
+		})
+  },
+  
+	saveResult: (e, value)=>{
+		if(deepdive.check){
+			$(e).addClass('seleccionado');
+			deepdive.check=false;
+			deepdive.group[deepdive.answersCont.answer]=value;
+			let t = setTimeout(()=>{
+				deepdive.check=true;
+				deepdive.next();
+			}, 100);
+		}
+  },
+  
+	next : ()=>{
+		deepdive.answersCont.answer++;
+		if(deepdive.answersCont.answer < deepdive.answersCont.all){
+			deepdive.crearanswer();
+		}else {
+			deepdive.mostrargroup();
+		}
+  },
+  
+	previous: ()=>{
+		deepdive.answersCont.answer--;
+		deepdive.crearanswer();
+	},
+  
+  mostrargroup: ()=>{
+		$("header").html(`<image src="assets/image/track.svg">`);
+    deepdive.progressBar();
+    
+		deepdive.listgroup(false, 'Submit', deepdive.evaluate);
+		deepdive.arrow.next.addClass('disabled').off('click');
+		$('#group').prepend(`<h1 class="text-center">Here are your answer:</h1>`);
+	},
+
+	listgroup:(evaluate, button, proceso)=>{
+    $('#quiz').empty().append
+    ('<div id="group"></div>');
+
+		$.each(deepdive.group, (e,f)=>{
+			let success = '';
+			let info=f;
+			if(evaluate && f==deepdive.questions[e].result){
+				deepdive.answersCont.allPoints++;
+				success='class="text-success"';
+			}else if(evaluate){
+				success=`class='text-danger'`;
+				info = `<strike>${f}</strike> ${deepdive.questions[e].result}`;
+			}
+			$("#group").append(`<p ${success}>${e+1}. ${deepdive.questions[e].answer} <strong>${info}</strong></p>`)
+    })
+    
+		$('<div>').addClass('text-center').append(
+			$('<button>').addClass('btn-lg btn-dark').html(button).click(proceso)
+		).appendTo("#group");
+	},
+	
+	evaluate:()=>{
+		$('#progreso').hide();
+		$('#arrows').hide();
+		deepdive.listgroup(true, 'regresar al inicio', deepdive.inicio);
+    let expretion='';
+    
+		if(deepdive.answersCont.allPoints === 0){
+			expretion='Ooooops, ';
+		} else if(deepdive.answersCont.allPoints === deepdive.answersCont.all) {
+			expretion='Woooow, ';
+		} 
+		let title=`${expretion}${deepdive.answersCont.allPoints} out of ${deepdive.answersCont.all} correct!`;
+		$('#group').prepend(`<h1 class="text-center">${title}</h1>`);
+	},
+	
+	inicio:()=>{
+		$('#progreso').show();
+		$('#arrows').show();
+		deepdive.group=[];
+		deepdive.answersCont.answer=0;
+		deepdive.answersCont.allPoints=0;
+		deepdive.crearanswer();
+  },
+  
+	iniciar : ()=>{
+		deepdive.answersCont.all= Object.keys(deepdive.questions).length;
+		deepdive.crearanswer();
+	}
 }
 
-function answerQuestion(){
-  $(".answer-button").off('click',answerQuestion);
-  var a = this.id;
-  console.log("Your answer: "+ a +"; The correct answer: " + correctAnswer);
-  checkScore(a); 
-  questionNumber++;
-  $('.quiz-abc').fadeTo(500,0, function(){
-    nextQuestion();
-  });
-}
-
-
-function pulseClick(i){
-  var btnCount = $('#answers').find('.answer-button').length-1;
-  console.log(btnCount);
-  $('#answers').find('.answer-button').eq(i).addClass('pulse').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',function(e) {
-    $(this).removeClass('pulse');
-    if(i === btnCount){
-      i=0;
-    } else {
-      i++;
-    }
-    pulseClick(i);
-  });
-}
-
-$(document).ready(function(){
-  nextQuestion();
-});
+$(document).ready(deepdive.iniciar)

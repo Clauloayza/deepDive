@@ -3,115 +3,116 @@
     padding: 0;
     box-sizing: border-box;
 }
-.deepQuestion{
-    background-color: #f8e1e7;
-    padding: 30px 30px;
-    margin: 10px auto;
-}
-.infglyphicon{
-  font-size: 20px;
-  color: #fff;
-  border: 13px solid #ff10a3;
-  border-radius: 1000px;
-}
-.image{
-    width: 100%;
-    height: 250px;
-}
-img{
-   width: 150px;
-   margin-top: 35px;    
-}
-.boxContainer{
-    background: #fff;
-    padding: 30px;
-}
-.quest{
-  font-size: 240%;
-  margin:0 0 40px 0; 
-  color:  #52515a;
+body{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  padding-top: 10px;
+  background: #FFEDF9;
 }
 .btn{
   text-align:left;
   background: #e2e5e3;
   border: 1px solid #000;
-}
-.btn-select{
-  font-size: 20px;
-  padding: 9px;
-  font-weight: 800;
+  width: 100%;
   margin-bottom: 10px;
-  color:  #52515a;
 }
-.btn-select:hover{
-  transition: all 0.6s;
-  background-color: #c0c4c0;
-}
-.check{
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-}
-.check:after {
-  position: absolute;
-  content: '\2714';
-  color: #1f955a;
-  transform: translateX(120px);
-  top: -20px;
-  opacity: 0;
-}
-.btn-select:active .check:after {
-  color:#10f066;
-}
-.btn-select:hover .check:after {
-  opacity: 1;
-}
-.abcOption{
-  font-size: 15px;
-  color:#fff;
-  background: #555071;
-  display: inline-block;
-  width: 25px;
-  height: 30px;
-  margin:0 13px 0 5px;
-  text-align: center;
-  padding-top: 5px;
-  border-radius:4px;
-  font-weight: 500;
-}
-.progress{
+
+#progreso .progress{
   height: 5px;
   margin-bottom: 0;
 }
-.icons{
-  background: #000;
+.progress .progress-bar {
+  background-color: #DF5696;
+}
+#progreso {
+  position: absolute;
+  top: -25px;
+  left: 0;
+  right: 0;
+}
+#arm button{
+  margin-right: 10px;
+}
+#arm img{
+  width: 40px;
+  height: 40px;
+}
+#arm .disabled{
+  opacity: 0.7;
+  border: none;
+  display: initial;
+  width: 57px;
+  margin-top: 10px;
+}
+.content {
+  position: relative;
+  background-color: #fff;
+  box-shadow: 4px 6px 38px rgba(214, 124, 124, 0.76);
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 60px 80px 90px;
+}
+#quiz p{
+  font-size: 100%;
+}
+#quiz h1 {
+  margin-bottom: 40px;
+}
+.alternativa {
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #4b4668;
   color: #fff;
-  font-size: 13px;
-  border-radius:100px;
-  padding: 9px;
-  margin: 0 5px;
-  
+  margin-right: 8px;
+  display: inline-block;
+  padding: 3px 8px 4px;
+  position: relative;
+  border-radius: 4px;
 }
-.icon{
-  margin: 40px 0 20px;
+.seleccionado button{
+  border-width: 2px;
 }
-.icon-twitter{
-  background: rgba(83, 192, 232, 0.54);
+.seleccionado button:after {
+  font-family: FontAwesome;
+  content: "\f00c";
+  color: #46684B;
+  position: absolute;
+  right: 25px;
 }
-.icon-facebook{
-  background: rgba(0, 47, 154, 0.38);  
+#redes{
+   margin-top: 30px;
+   opacity: 0.5;
 }
-.icon-google-plus{
-  background: rgba(203, 15, 15, 0.42); 
+#redes:hover{
+   opacity: 1;
+}
+.btn-dark {
+  text-align: center;
+  padding: 6px 14px;
+  background-color: #4b4668;
   color: #fff;
+  margin-top: 30px;
 }
-.prevNext span{
-	font-size: 35px;
-	color: #ff10a3;
-	margin: 10px;
-	cursor: pointer;
-}
-.footer{
-  color: #bebebe;
-  margin: 12% 5%;
+@media (max-width: 850px){
+  header{
+      margin-bottom: 20px;
+      padding-top: 20px;
+  }
+  #arm{
+      position: absolute;
+      top: 0;
+      right: 20px;
+  }
+  .content {
+      padding: 20px;
+  }
+  #respuestas{
+      max-width: 100%;
+  }
+  #quiz h1{
+      font-size: 24px;
+      margin-bottom: 20px;
+  }
+  #quiz p{
+      font-size: 110%;
+  }
 }
