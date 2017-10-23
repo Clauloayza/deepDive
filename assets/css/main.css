@@ -16,19 +16,6 @@ body{
   margin-bottom: 10px;
 }
 
-#progreso .progress{
-  height: 5px;
-  margin-bottom: 0;
-}
-.progress .progress-bar {
-  background-color: #DF5696;
-}
-#progreso {
-  position: absolute;
-  top: -25px;
-  left: 0;
-  right: 0;
-}
 #arm button{
   margin-right: 10px;
 }
@@ -43,7 +30,7 @@ body{
   width: 57px;
   margin-top: 10px;
 }
-.content {
+.boxContainer {
   position: relative;
   background-color: #fff;
   box-shadow: 4px 6px 38px rgba(214, 124, 124, 0.76);
@@ -56,6 +43,19 @@ body{
 }
 #quiz h1 {
   margin-bottom: 40px;
+}
+#progress .progress{
+  height: 5px;
+  margin-bottom: 0;
+}
+.progress .progress-bar {
+  background-color: #DF5696;
+}
+#progress {
+  position: absolute;
+  top: -25px;
+  left: 0;
+  right: 0;
 }
 .alternativa {
   font-size: 14px;
@@ -113,6 +113,6 @@ body{
       margin-bottom: 20px;
   }
   #quiz p{
-      font-size: 110%;
+      font-size: 100%;
   }
 }
